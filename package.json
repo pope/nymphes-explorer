@@ -1,0 +1,9 @@
+{
+  "name": "nymphes-explorer",
+  "version": "0.0.1",
+  "description": "A web app for poking around the Dreadbox Nymphes",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
