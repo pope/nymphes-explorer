@@ -1,3 +1,4 @@
+import * as deepEqual from 'fast-deep-equal';
 import { concat, debounceTime, distinctUntilChanged, filter, from, fromEvent, map, of, scan, switchMap } from 'rxjs';
 
 const CC_MIDI_COMMAND = 0xB0;
@@ -14,16 +15,7 @@ const nymphesPorts$ = midiAccess$.pipe(
     switchMap((midiAccess) => concat(
         of(getNymphesPorts(midiAccess)),
         fromEvent(midiAccess, 'statechange').pipe((map(() => getNymphesPorts(midiAccess)))))),
-    distinctUntilChanged((previous, current) => {
-        if (previous === current) {
-            return true;
-        }
-        if (previous === undefined || current === undefined) {
-            return false;
-        }
-        // TODO(pope): Do a better equality check.
-        return previous.input.id === current.input.id;
-    }),
+    distinctUntilChanged(deepEqual),
 );
 
 const currentCcValues$ = nymphesPorts$.pipe(
@@ -34,6 +26,7 @@ const currentCcValues$ = nymphesPorts$.pipe(
         return fromEvent<WebMidi.MIDIMessageEvent>(ports.input, 'midimessage')
     }),
     filter((event) => !event || (event.data.length === 3 && event.data.at(0) === CC_MIDI_COMMAND)),
+    distinctUntilChanged((prev, cur) => deepEqual(prev?.data, cur?.data)),
     scan((state, event) => {
         if (!event) {
             // Reset
