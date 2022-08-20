@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "jsxImportSource": "preact",
+    "strict": true
+  },
+  "include": ["src/**/*"]
+}
