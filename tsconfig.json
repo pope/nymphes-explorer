@@ -2,7 +2,9 @@
   "compilerOptions": {
     "alwaysStrict": true,
     "jsxImportSource": "preact",
-    "strict": true
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "target": "ES2022"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
 }
