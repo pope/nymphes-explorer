@@ -3,7 +3,12 @@
   "version": "0.0.1",
   "description": "A web app for poking around the Dreadbox Nymphes",
   "private": true,
+  "source": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "parcel build",
+    "start": "parcel"
+  },
+  "devDependencies": {
+    "parcel": "^2.7.0"
   }
 }
