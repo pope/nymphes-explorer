@@ -35,12 +35,11 @@ const nymphesPorts$ = midiAccess$.pipe(
 );
 
 const currentCcValues$ = nymphesPorts$.pipe(
-	switchMap((ports) => {
-		if (!ports) {
-			return of(null);
-		}
-		return fromEvent<WebMidi.MIDIMessageEvent>(ports.input, 'midimessage');
-	}),
+	switchMap((ports) =>
+		ports
+			? fromEvent<WebMidi.MIDIMessageEvent>(ports.input, 'midimessage')
+			: of(null)
+	),
 	filter(
 		(event) =>
 			!event ||
