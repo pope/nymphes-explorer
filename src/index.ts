@@ -12,7 +12,7 @@ import {
 	switchMap,
 } from 'rxjs';
 
-import { CC_MIDI_COMMAND, CC_NAME } from './nymphes/constants';
+import { CC_MIDI_COMMAND, CC_NUMBERS } from './nymphes/constants';
 
 interface NymphesPorts {
 	readonly midiAccess: WebMidi.MIDIAccess;
@@ -57,9 +57,9 @@ const currentCcValues$ = nymphesPorts$.pipe(
 		/* eslint-enable */
 		return {
 			...state,
-			[CC_NAME[ccNum]?.name ?? String(ccNum)]: ccVal,
+			[CC_NUMBERS[ccNum]]: ccVal,
 		};
-	}, {} as { [key: number]: number })
+	}, {} as { [key: string]: number })
 );
 
 function getNymphesPorts(
