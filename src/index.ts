@@ -1,6 +1,7 @@
 import { debounceTime, scan } from 'rxjs';
 
 import { CC_NUMBERS } from './nymphes/constants';
+import { MidiValue } from './nymphes/types';
 import { ccValue$ } from './nymphes/webmidi';
 
 ccValue$
@@ -14,7 +15,7 @@ ccValue$
 				...state,
 				[CC_NUMBERS[data.ccNum]]: data.ccVal,
 			};
-		}, {} as { [key: string]: number }),
+		}, {} as { [key: string]: MidiValue }),
 		debounceTime(5)
 	)
 	.subscribe((obj) => void console.log(obj));
