@@ -11,8 +11,8 @@ import {
 	switchMap,
 } from 'rxjs';
 
-import { assert, assertExists } from '../asserts';
-import { CC_MIDI_COMMAND, CC_NUMBERS } from './constants';
+import { assertKnownCcNumber, assertValidMidiValue } from './asserts';
+import { CC_MIDI_COMMAND, CcNumber } from './constants';
 import { MidiValue } from './types';
 
 interface NymphesPorts {
@@ -49,25 +49,6 @@ function getNymphesPorts(
 	};
 }
 
-function assertKnownCcNumber(
-	ccNum: number | undefined
-): asserts ccNum is CC_NUMBERS {
-	assertExists(ccNum, `CC Number is not a number: ${ccNum}`);
-	if (!(ccNum in CC_NUMBERS)) {
-		throw new Error(`Unknown CC Number: ${ccNum}`);
-	}
-}
-
-function assertValidMidiValue(
-	midiVal: number | undefined
-): asserts midiVal is MidiValue {
-	assertExists(midiVal, `Midi value is not a number: ${midiVal}`);
-	assert(
-		midiVal >= 0 && midiVal < 128,
-		`Midi value is not within range of [0, 128): ${midiVal}`
-	);
-}
-
 const midiAccess$ = from(navigator.requestMIDIAccess());
 
 const nymphesPorts$ = midiAccess$.pipe(
@@ -83,7 +64,7 @@ const nymphesPorts$ = midiAccess$.pipe(
 );
 
 export const ccValue$: Observable<
-	{ ccNum: CC_NUMBERS; ccVal: MidiValue } | undefined
+	{ ccNum: CcNumber; ccVal: MidiValue } | undefined
 > = nymphesPorts$.pipe(
 	switchMap((ports) =>
 		ports

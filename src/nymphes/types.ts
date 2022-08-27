@@ -5,44 +5,48 @@ type _Range<
 
 export type MidiValue = _Range<128>;
 
-export enum ModSource {
-	LFO_2 = 0,
-	MOD_WHEEL = 1,
-	VELOCITY = 2,
-	AFTERTOUCH = 3,
+export namespace ModSource {
+	export const LFO_2 = 0;
+	export const MOD_WHEEL = 1;
+	export const VELOCITY = 2;
+	export const AFTERTOUCH = 3;
 }
+export type ModSource = typeof ModSource[keyof typeof ModSource];
 
-export enum Toggle {
-	OFF = 0,
-	ON = 1,
+export namespace Toggle {
+	export const OFF = 0;
+	export const ON = 1;
 }
+export type Toggle = typeof Toggle[keyof typeof Toggle];
 
-export enum LfoType {
-	BPM = 0,
-	LOW = 1,
-	HIGH = 2,
-	TRACK = 3,
+export namespace LfoType {
+	export const BPM = 0;
+	export const LOW = 1;
+	export const HIGH = 2;
+	export const TRACK = 3;
 }
+export type LfoType = typeof LfoType[keyof typeof LfoType];
 
-export enum PlayMode {
-	POLY = 0,
-	UNI_A = 1,
-	UNI_B = 2,
-	TRI = 3,
-	DUO = 4,
-	MONO = 5,
+export namespace PlayMode {
+	export const POLY = 0;
+	export const UNI_A = 1;
+	export const UNI_B = 2;
+	export const TRI = 3;
+	export const DUO = 4;
+	export const MONO = 5;
 }
+export type PlayMode = typeof PlayMode[keyof typeof PlayMode];
 
 export interface Envelope {
 	readonly attack: MidiValue;
-	readonly delay: MidiValue;
+	readonly decay: MidiValue;
 	readonly sustain: MidiValue;
 	readonly release: MidiValue;
 }
 
 export interface EnvelopeModulation {
 	readonly attackDepth: MidiValue;
-	readonly delayDepth: MidiValue;
+	readonly decayDepth: MidiValue;
 	readonly sustainDepth: MidiValue;
 	readonly releaseDepth: MidiValue;
 }
@@ -117,7 +121,7 @@ export interface Parameters {
 	readonly lfo2Modulation: Modulation;
 	readonly modWheelModulation: Modulation;
 	readonly velocityModulation: Modulation;
-	readonly aftertouchModuler: Modulation;
+	readonly aftertouchModulation: Modulation;
 
 	readonly sustainPedal: Toggle;
 	readonly legato: Toggle;
