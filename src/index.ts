@@ -429,4 +429,9 @@ const state$: Observable<State> = ccValue$.pipe(
 	debounceTime(5)
 );
 
-state$.subscribe(console.log);
+state$.subscribe((val) => {
+	console.log(val);
+	const elem = document.getElementById('log');
+	assertExists(elem);
+	elem.innerHTML = JSON.stringify(val, undefined, 2);
+});
