@@ -50,3 +50,19 @@ At this point, in the Nymphes it has:
 - Mod Wheel - OSC wave depth = 95
 
 In my naive implementation, where I'm only storing the latest CC value, I'm not capturing that complexity on the read.
+
+### UI Ideas
+
+#### Vertical Slider
+
+- [How to display a range input slider vertically](https://stackoverflow.com/questions/15935837/how-to-display-a-range-input-slider-vertically)
+- https://material.preactjs.com/
+- https://github.com/material-components/material-components-web/tree/master/packages/mdc-slider
+- https://open-ui.org/components/slider.research
+- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/slider_role
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
+- https://developer.mozilla.org/en-US/docs/Web/CSS/appearance
+
+#### Other Web Midi Control Software
+
+- https://github.com/benc-uk/touchmidi
